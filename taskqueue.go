@@ -2,26 +2,10 @@ package main
 
 import (
 	//"encoding/json"
-	"bytes"
+	//"bytes"
 	"github.com/gorilla/mux"
 	"net/http"
 )
-
-type User struct {
-	primaryKey int
-	uname      string //uniqueな名前
-	upass      string //hash
-}
-
-// json parse用構造体
-type Task struct {
-	//primaryKey int
-	content    string `json:"content"`
-	deadline   string `json:"deadline"`
-	from       string `json:"from"`
-	workload   string `json:"workload"`
-	importance string `json:"importance"`
-}
 
 /*
 	route
@@ -52,34 +36,4 @@ func main() {
 	*/
 
 	http.ListenAndServe(":8000", router)
-}
-
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("test"))
-}
-
-func taskAddHandler(w http.ResponseWriter, r *http.Request) {
-	responseWrite(w, r)
-}
-
-func taskDeleteHandler(w http.ResponseWriter, r *http.Request) {
-	responseWrite(w, r)
-}
-
-func taskChangeHandler(w http.ResponseWriter, r *http.Request) {
-	responseWrite(w, r)
-}
-
-func taskAllHandler(w http.ResponseWriter, r *http.Request) {
-	responseWrite(w, r)
-}
-
-func responseWrite(w http.ResponseWriter, r *http.Request) {
-	if r.Body == nil {
-		w.Write([]byte("non value"))
-	}
-
-	bufbody := new(bytes.Buffer)
-	bufbody.ReadFrom(r.Body)
-	w.Write([]byte(bufbody.String()))
 }
