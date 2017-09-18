@@ -1,11 +1,17 @@
 package database
 
-import "testing"
+import (
+	"testing"
+	"fmt"
+)
 
-func TestDB_GetUserPass(t *testing.T) {
-	db := NewDB("../test.db")
-	pass := db.GetUserPass("test_user2")
-	if pass != ""{
+func TestDB_GetAllTasks(t *testing.T) {
+	db := NewDB("../dev.db")
+	tasks := db.GetAllTasks()
 
+	if tasks == nil {
+		t.Error(tasks)
 	}
+
+	fmt.Println(tasks)
 }
