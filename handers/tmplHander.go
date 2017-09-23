@@ -3,10 +3,10 @@ package handers
 import (
 	"sync"
 	"text/template"
-	_ "net/http"
-	"os"
+	"net/http"
+	"log"
 	"path/filepath"
-	_ "log"
+	"os"
 )
 
 const templatePath string = "views"
@@ -38,19 +38,24 @@ func (t *TemplateHandler) Parse() error {
 	}
 
 	return nil
-}/*
+}
 
 func (t *TemplateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	err := t.Parse()
+	if err != nil{
+		panic(err)
+	}
+	/*
 	t.once.Do(func() {
 		err := t.Parse()
 		if err != nil {
 			log.Fatal(err)
 		}
 	})
+	*/
 
-	err := t.tmpl.Execute(w, r)
+	err = t.tmpl.Execute(w, r)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
-*/

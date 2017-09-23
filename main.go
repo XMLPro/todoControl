@@ -1,14 +1,11 @@
 package main
 
 import (
-	"encoding/json"
-	"github.com/XMLPro/todoControl/database"
 	"github.com/gorilla/mux"
-	"log"
 	"net/http"
+	"github.com/XMLPro/todoControl/handers"
 )
 
-var db *database.DB = database.NewDB("test.db")
 
 func main() {
 	r := initRouter()
@@ -20,28 +17,12 @@ func main() {
 
 func initRouter() *mux.Router {
 	router := mux.NewRouter()
+	router.Handle("/", handers.NewTemplateHandler("index.html")).Methods("GET")
 	router.HandleFunc("/register", TemporaryHandler).Methods("POST")
+	router.HandleFunc("/task/all", handers.GetTasksHandler).Methods("POST")
 	return router
 }
 
-type User struct {
-	Name string
-	Pass string
-}
-
-//database
-func Authentication(name, password string) {
-
-}
 
 func TemporaryHandler(w http.ResponseWriter, r *http.Request) {
-	var user User
-	decoder := json.NewDecoder(r.Body)
-	err := decoder.Decode(&user)
-
-	if err != nil {
-		panic(err)
-	}
-
-	log.Println(user)
 }

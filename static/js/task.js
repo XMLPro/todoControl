@@ -1,16 +1,32 @@
+var task = new Vue({
+    el : "#post_test",
+    data : {
+        counter : 0,
+    },
 
+    methods :{
+        addCounter : function () {
+           counter++;
+        }
+    }
+})
+/*
 var todo = new Vue({
     el: '#todo',
-    components :{
+    components :
         'add-task': addTask
     }
 })
 
 var addTask = ({
     data: {
-        content: "",
     },
     methods:{
+        getAllTask: function() {
+            axios.post("")
+
+        },
+
         postTask : function(){
             axios.post('/test')
         }
@@ -24,3 +40,4 @@ var addTask = ({
 	        </span>
          </div>`,
 })
+*/

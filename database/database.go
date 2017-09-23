@@ -13,9 +13,11 @@ type DB struct {
 
 func NewDB(dbname string) *DB {
 	db, err := sql.Open("sqlite3", dbname)
+
 	if err != nil {
 		panic(err)
 	}
+
 	return &DB{db: db}
 }
 
@@ -25,10 +27,10 @@ func (db *DB) Close() {
 
 // これ分離したい
 type Task struct {
-	Task_id    int
-	Content    string
-	Place_id   int
-	Importance int
+	Task_id    int    `json:"task_id"`
+	Content    string `json:"content"`
+	Place_id   int    `json:"place_id"`
+	Importance int    `json:"importance"`
 }
 
 type Place struct {
@@ -94,6 +96,10 @@ func (db *DB) GetAllPlaces() []Place {
 	}
 
 	return places
+}
+
+func (db *DB) InsertTask() {
+
 }
 
 /*
