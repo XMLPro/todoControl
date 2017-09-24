@@ -10,25 +10,30 @@ const store = new Vuex.Store({
     }
 })
 
-const newTask = Vue.component('todo-newtask', {
+let todoNewTask = Vue.extend({
+    
     template: '<div> new task </div>'
 })
 
 
-Vue.component('todo-tasks', {
+
+let todoTasks = Vue.extend({
     template: '<div> task list </div>'
 })
 
+/*
 Vue.component('todo-place', {
 })
+*/
 
 
 new Vue({
     el : '#app',
-    delimiters : ['<{', '}>']
+    delimiters : ['<{', '}>'],
 
     components: {
-        'newTask': newTask,
+        'todo-newtask': todoNewTask,
+        'todo-tasks': todoTasks
     }
 })
 
