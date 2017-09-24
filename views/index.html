@@ -7,38 +7,22 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vuex"></script>
 </head>
 
 <body>
-<div class="container">
-    <div class="header">
-        <h1>Todo Control</h1>
+    <div class="container">
+        <div class="header">
+            <h1>Todo Control</h1>
+        </div>
+        <hr>
+
+        <div id="app">
+            <todo-newtask></todo-newtask>
+            <todo-tasks></todo-tasks>
+        </div>
     </div>
-    <hr>
-
-    <div id="post_test">
-        <button v-on:click="counter += 1">+</button>
-        <{ counter }>
-    </div>
-
-</div>
-<script>
-    var task = new Vue({
-        el : "#post_test",
-        delimiters: ["<{","}>"],
-
-        data : {
-            counter : 0,
-        },
-
-        methods :{
-            addCounter : function () {
-                counter++;
-            }
-        },
-
-    })
-</script>
+    <script src="static/js/task.js"></script>
 </body>
 
 </html>

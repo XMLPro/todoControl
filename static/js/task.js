@@ -1,43 +1,35 @@
-var task = new Vue({
-    el : "#post_test",
-    data : {
-        counter : 0,
+const store = new Vuex.Store({
+    state: {
+        tasks : []
     },
 
-    methods :{
-        addCounter : function () {
-           counter++;
+    mutations :{
+        initTasks(state, data) {
+            state.tasks = data
         }
     }
 })
-/*
-var todo = new Vue({
-    el: '#todo',
-    components :
-        'add-task': addTask
+
+const newTask = Vue.component('todo-newtask', {
+    template: '<div> new task </div>'
+})
+
+
+Vue.component('todo-tasks', {
+    template: '<div> task list </div>'
+})
+
+Vue.component('todo-place', {
+})
+
+
+new Vue({
+    el : '#app',
+    delimiters : ['<{', '}>']
+
+    components: {
+        'newTask': newTask,
     }
 })
 
-var addTask = ({
-    data: {
-    },
-    methods:{
-        getAllTask: function() {
-            axios.post("")
 
-        },
-
-        postTask : function(){
-            axios.post('/test')
-        }
-    },
-
-    template:
-        `<div id="addTask" class="input-group">
-            <input v-model="content" class="form-control">
-            <span class="input-group-btn">
-		        <button type="button" v-on:click="postTask" class="btn btn-default">Add Task</button>
-	        </span>
-         </div>`,
-})
-*/

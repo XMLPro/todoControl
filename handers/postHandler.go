@@ -1,21 +1,20 @@
 package handers
 
 import (
-	"net/http"
-	"github.com/XMLPro/todoControl/database"
 	"encoding/json"
-	"log"
+	"net/http"
+
+	"github.com/XMLPro/todoControl/database"
 )
 
-
-func GetTasksHandler(w http.ResponseWriter,  r *http.Request) {
-	db  := database.NewDB("dev.db")
+func GetTasksHandler(w http.ResponseWriter, r *http.Request) {
+	db := database.NewDB("dev.db")
 
 	encJson, err := json.Marshal(db.GetAllTasks())
 
-	log.Println(string(encJson))
+	//log.Println(string(encJson))
 
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 
