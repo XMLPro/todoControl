@@ -27,7 +27,6 @@ func (db *DB) Close() {
 	db.db.Close()
 }
 
-
 func (db *DB) GetAllTasks() []models.Task {
 	rows, err := sq.Select("*").
 		From("tasks").
@@ -87,3 +86,28 @@ func (db *DB) GetAllPlaces() []models.Place {
 	return places
 }
 
+func (db *DB) InsertTask(m models.Task) error {
+	_, err := sq.Insert("tasks").
+		Columns("content", "place_id", "important").
+		Values(m.Content, m.Place_id, m.Task_id).
+		RunWith(db.db).
+		Exec()
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (db *DB) InsertPlace(m models.Place) error {
+	return nil
+}
+
+func (db *DB) DeleteDoneTask() error {
+	return nil
+}
+
+func (db *DB) DeletePlace() error {
+	return nil
+}

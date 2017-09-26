@@ -22,7 +22,6 @@ func GetTasksHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetPlaceHandler(w http.ResponseWriter, r *http.Request){
-
 }
 
 func PostTaskHandler(w http.ResponseWriter, r *http.Request) {
