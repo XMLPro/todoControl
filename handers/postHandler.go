@@ -18,6 +18,17 @@ func GetTasksHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
+	writeJson(w, encJson)
+}
+
+func GetPlaceHandler(w http.ResponseWriter, r *http.Request){
+
+}
+
+func PostTaskHandler(w http.ResponseWriter, r *http.Request) {
+}
+
+func writeJson(w http.ResponseWriter, data []byte) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(encJson)
+	w.Write(data)
 }
