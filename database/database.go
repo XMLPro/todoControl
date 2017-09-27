@@ -46,6 +46,7 @@ func (db *DB) GetAllTasks() []models.Task {
 			&task.Content,
 			&task.Place_id,
 			&task.Importance,
+			&task.Done,
 		)
 
 		if err != nil {
@@ -101,6 +102,16 @@ func (db *DB) InsertTask(m models.Task) error {
 }
 
 func (db *DB) InsertPlace(m models.Place) error {
+	_, err := sq.Insert("tasks").
+		Columns("Place_name", "important").
+		Values(m.Place_name, m.Importance).
+		RunWith(db.db).
+		Exec()
+
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
