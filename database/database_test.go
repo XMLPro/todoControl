@@ -2,28 +2,16 @@ package database
 
 import (
 	"testing"
-	"fmt"
-	"github.com/XMLPro/todoControl/models"
 )
 
-func TestDB_GetAllTasks(t *testing.T) {
-	db := NewDB("../dev.db")
-	tasks := db.GetAllTasks()
+const test_db_name = "test.db"
 
-	if tasks == nil {
-		t.Error(tasks)
+func TestNewDB(t *testing.T) {
+	db := NewDB(test_db_name)
+
+	if db == nil {
+		t.Error(db)
 	}
 
-	fmt.Println(tasks)
-}
-
-func TestDB_InsertTask(t *testing.T) {
-	db := NewDB("../dev.db")
-	task := models.Task{Task_id:0, Content:"Aaa", Place_id:0, Importance:0}
-
-	err := db.InsertTask(task)
-
-	if err != nil {
-		t.Error(err)
-	}
+	db.Close()
 }

@@ -1,0 +1,53 @@
+package database
+
+import (
+	"github.com/XMLPro/todoControl/models"
+
+	sq "github.com/Masterminds/squirrel"
+	"log"
+)
+
+func (db *DB) GetAllTasks() ([]models.Task, error) {
+	rows, err := sq.Select("*").
+		From("tasks").
+		RunWith(db.db).
+		Query()
+
+	if err != nil {
+		return nil, err
+	}
+
+	var tasks []models.Task
+
+	for rows.Next() {
+		task := models.Task{}
+		err = rows.Scan(
+			&task.Task_id,
+			&task.Content,
+			&task.Place_id,
+			&task.Importance,
+			&task.Done,
+		)
+
+		if err != nil {
+			log.Println(err)
+		}
+		tasks = append(tasks, task)
+	}
+
+	return tasks, nil
+}
+
+func (db *DB) InsertTask(m models.Task) error {
+	_, err := sq.Insert("tasks").
+		Columns("content", "place_id", "important").
+		Values(m.Content, m.Place_id, m.Task_id).
+		RunWith(db.db).
+		Exec()
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
