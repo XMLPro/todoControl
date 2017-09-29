@@ -1,11 +1,21 @@
 package models
 
+import "github.com/kataras/iris/core/errors"
+
 type Place struct {
-	Place_id   int    `json:"place_id"`
-	Place_name string `json:"place_name"`
-	Importance string `json:"importance"`
+	PlaceId    int    `json:"place_id"`
+	PlaceName  string `json:"place_name"`
+	Importance int    `json:"importance"`
 }
 
 func (m *Place) Valid() error {
+	if m.PlaceName == ""{
+		return errors.New("Place Error: content is none ")
+	}
+
+	if m.Importance < 0 || m.Importance > 100 {
+		return errors.New("Place Error: importance is out of range ")
+	}
+
 	return nil
 }
