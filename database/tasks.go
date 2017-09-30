@@ -1,10 +1,9 @@
 package database
 
 import (
-	"github.com/XMLPro/todoControl/models"
-
-	sq "github.com/Masterminds/squirrel"
 	"log"
+	"github.com/XMLPro/todoControl/models"
+	sq "github.com/Masterminds/squirrel"
 )
 
 func (db *DB) GetAllTasks() ([]models.Task, error) {
@@ -22,9 +21,9 @@ func (db *DB) GetAllTasks() ([]models.Task, error) {
 	for rows.Next() {
 		task := models.Task{}
 		err = rows.Scan(
-			&task.Task_id,
+			&task.TaskId,
 			&task.Content,
-			&task.Place_id,
+			&task.PlaceId,
 			&task.Importance,
 			&task.Done,
 		)
@@ -41,7 +40,7 @@ func (db *DB) GetAllTasks() ([]models.Task, error) {
 func (db *DB) InsertTask(m models.Task) error {
 	_, err := sq.Insert("tasks").
 		Columns("content", "place_id", "important").
-		Values(m.Content, m.Place_id, m.Task_id).
+		Values(m.Content, m.PlaceId, m.TaskId).
 		RunWith(db.db).
 		Exec()
 
@@ -50,4 +49,7 @@ func (db *DB) InsertTask(m models.Task) error {
 	}
 
 	return nil
+}
+
+func (db *DB) DeleteDoneTask(){
 }

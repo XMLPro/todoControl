@@ -4,40 +4,23 @@ import (
 	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
 
+	"log"
 )
 
 type DB struct {
 	db *sql.DB
 }
 
-func NewDB(dbname string) *DB {
-	db, err := sql.Open("sqlite3", dbname)
+func NewDB(dbName string) *DB {
+	db, err := sql.Open("sqlite3", dbName)
 
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
-	return &DB{db: db}
+	return &DB{db:db}
 }
 
 func (db *DB) Close() {
 	db.db.Close()
 }
-
-
-/*
-
-func (db *DB) DeleteDoneTask() error {
-	return nil
-}
-
-
-func (db *DB) existTaskRecord(id int){
-
-}
-
-func (db *DB) ExistiRecoed(table string, id int) bool {
-
-	return true
-}
-*/

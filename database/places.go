@@ -1,10 +1,6 @@
 package database
 
-import (
-	"github.com/XMLPro/todoControl/models"
-	sq "github.com/Masterminds/squirrel"
-)
-
+/*
 func (db *DB) GetAllPlaces() ([]models.Place, error) {
 	rows, err := sq.Select("*").
 		From("places").
