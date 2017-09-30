@@ -3,18 +3,20 @@ package database
 import (
 	"testing"
 	"github.com/XMLPro/todoControl/models"
-	"log"
 )
 
 //取り出したタプルが妥当か
 func TestDB_GetAllTasks(t *testing.T) {
 	db := NewDB("test.db")
 	defer db.Close()
+
 	tasks, err := db.GetAllTasks()
 
 	if err != nil {
 		t.Error(err)
 	}
+
+	t.Log("got tasks: ", tasks)
 
 	for _, task := range tasks {
 		if err := task.Valid(); err != nil {
@@ -60,7 +62,7 @@ func TestDB_UpdateTask(t *testing.T){
 	defer db.Close()
 
 	updateTask := models.Task{
-		TaskId: 0,
+		TaskId: db.NextTaskID() + 1,
 		Content: "update target task",
 		PlaceId: 0,
 		Importance: 0,
@@ -70,6 +72,8 @@ func TestDB_UpdateTask(t *testing.T){
 	if err := db.InsertTask(updateTask); err != nil{
 		t.Log(err)
 	}
+
+
 }
 
 

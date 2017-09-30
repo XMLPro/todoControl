@@ -51,5 +51,23 @@ func (db *DB) InsertTask(m models.Task) error {
 	return nil
 }
 
-func (db *DB) DeleteDoneTask(){
+func (db *DB) DeleteDoneTask() {
+}
+
+func (db *DB) NextTaskID() int {
+	res, err := sq.Select("max(task_id)").
+		From("tasks").
+		Query()
+
+	if err != nil {
+		log.Println(err)
+	}
+
+	var next int
+	err = res.Scan(&next)
+	if err != nil {
+		log.Println(err)
+	}
+
+	return next + 1
 }

@@ -1,6 +1,6 @@
 package models
 
-import "github.com/kataras/iris/core/errors"
+import "errors"
 
 type Place struct {
 	PlaceId    int    `json:"place_id"`
