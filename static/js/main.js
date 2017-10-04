@@ -5,31 +5,64 @@ const store = new  Vuex.Store({
     },
 
     mutations: {
-        addTask(){},
+        addTask(state, task){
+            state.tasks.push(task)
+        },
         addPlaces(){},
         deleteDoneTask(){},
         deltePlace(){},
     },
+    getters: {
+        warningTask: (state) => {
+            //ヤバイタスク計算
+            //taskがないときはnullを返す
+            return "gnwegoaw"
+        }
+    }
 })
 
-var app = new Vue({
-    el: '.new-task',
+let warningTask = new Vue({
+    el: '#warning-task',
+    computed: {
+        getWarningTask: function(){
+            return store.getters.warningTask
+        }
+    }
+})
+
+let newTask = new Vue({
+    el: '#new-task',
     data:{
         content : "",
-        tasks : []
     },
     
     methods:{
         addTask: function(){
             if(this.content.trim() == "")
-                return
+                return null
 
-            this.tasks.push(this.content)
             this.content = "";
-        },
+        }
     }
 })
 
-var todolist = new Vue({
-    el: 'list'
+let todolist = new Vue({
+    el: '#task-list',
+    created: function(){
+        ///task/allにリクエスト送ってstoreに収納
+    },
+
+    computed:{
+        tasks: function(){
+            //taskを返す
+            return ['a', 'a']
+        }
+    },
+
+    methods: {
+        editTask: function(){
+            //modal windowを開いて編集する
+        }
+    }
 })
+
