@@ -8,15 +8,19 @@ const store = new  Vuex.Store({
         addTask(state, task){
             state.tasks.push(task)
         },
-        addPlaces(){},
+        addPlaces(state, place){
+            state.places.push(place)
+        },
         deleteDoneTask(){},
-        deltePlace(){},
+        deletePlace(){},
     },
     getters: {
         warningTask: (state) => {
-            //ヤバイタスク計算
-            //taskがないときはnullを返す
-            return "gnwegoaw"
+            /*
+            state.tasks.forEach((task) => {
+            })
+            */
+            return null
         }
     }
 })
@@ -50,12 +54,17 @@ let todolist = new Vue({
     el: '#task-list',
     created: function(){
         ///task/allにリクエスト送ってstoreに収納
+        axios.post('/task/all')
+            .then((response) => {
+                response.data.forEach((data) => {
+                    store.commit('addTask', data)
+                })
+            })
     },
 
     computed:{
         tasks: function(){
-            //taskを返す
-            return ['a', 'a']
+            return store.state.tasks
         }
     },
 
