@@ -23,11 +23,12 @@
                        v-model="content" v-on:keyup.enter="addTask" >
             </div>
         </div>
+        <hr>
         <div class="row" id="task-list">
-            <div v-for="task in tasks" class="col-sm-6 task">
-                <div class="task-col">
-                    <div class="task-content">{{ task.content }}</div>
-                    <div class="taskinfo">
+            <div v-for="task in tasks" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="panel panel-primary">
+                    <div class="panel-body">{{ task.content }}</div>
+                    <div class="panel-footer">
                         <span class="taskinfo-limit">期限:{{ task.limit }}</span>
                         <span class="taskinfo-place">場所:{{ task.place_id }}</span>
                         <span class="taskinfo-importance">重要度:{{ task.importance }}</span>
