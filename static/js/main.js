@@ -14,17 +14,24 @@ const store = new  Vuex.Store({
     },
 
     getters: {
-        /*
         replacePlaceName: (state) => (id) =>{
             return null
         },
 
-        /*
         task: (state) => (id) =>{
-            return 1
+            for(var i=0; i<state.tasks.length; i++){
+                if(id == state.tasks[i].id) return state.tasks[i]
+            }
         },
 
-        /*
+        placeImportance: (state) => (id) => {
+            for(var i=0; i<state.places.length; i++){
+                if(id == state.places[i].id) return state.places[i].importance
+            }
+
+            return null
+        },
+
         warningTask: (state, getters) => {
             if(state.tasks.length == 0) return null
             var values = state.tasks.map((task) => {
@@ -40,9 +47,8 @@ const store = new  Vuex.Store({
                 else return 1
             })
 
-            return getters.task(values[0])
+            return getters.task(values[0].task_id)
         },
-        */
 
         taskList: (state) => {
             return state.tasks
@@ -54,7 +60,7 @@ let warningTask = new Vue({
     el: '#warning-task',
     computed: {
         warningTask: function(){
-            return null
+            return store.getters.warningTask
         }
     }
 })
