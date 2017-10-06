@@ -1,7 +1,7 @@
 CREATE TABLE tasks (
   id         INTEGER PRIMARY KEY,
   content    TEXT NOT NULL,
-  limit_time TEXT,
+  limit_time TEXT DEFAULT "",
   workload   INTEGER,
   place_id   INTEGER DEFAULT 0,
   importance INTEGER

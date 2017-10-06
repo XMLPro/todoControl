@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"github.com/XMLPro/todoControl/database"
 	"log"
+	"github.com/XMLPro/todoControl/models"
 )
 
 var db *database.DB = database.NewDB("dev.db")
@@ -35,4 +36,17 @@ func GetPlacesHandler(w http.ResponseWriter, r *http.Request) {
 func writeJson(w http.ResponseWriter, data []byte) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(data)
+}
+
+func AddTask(w http.ResponseWriter, r *http.Request){
+	var task models.Task
+	err := json.NewDecoder(r.Body).Decode(&task)
+
+	if err != nil{
+		log.Println(err)
+	}
+
+	db.InsertTask(task)
+	jsonData,_  := json.Marshal(task)
+	writeJson(w,jsonData)
 }
