@@ -5,7 +5,7 @@ const store = new  Vuex.Store({
     },
 
     mutations: {
-        addTask(state, task){
+        addTask(state, task) {
             state.tasks.push(task)
         },
         addPlace(state, place){
@@ -14,10 +14,6 @@ const store = new  Vuex.Store({
     },
 
     getters: {
-        replacePlaceName: (state) => (id) =>{
-            return null
-        },
-
         task: (state) => (id) =>{
             for(var i=0; i<state.tasks.length; i++){
                 if(id == state.tasks[i].id) return state.tasks[i]
@@ -65,6 +61,7 @@ let warningTask = new Vue({
     }
 })
 
+
 let newTask = new Vue({
     el: '#new-task',
     data: {
@@ -77,19 +74,58 @@ let newTask = new Vue({
                 return null
 
             axios.post('/task/add', {content: this.content}).
-                then((response) => store.commit('addTask', response.data)).
-                catch((err) => console.log(err))
+                then((response) => store.commit('addTask', response.data))
 
             this.content = "";
         }
     }
 })
 
+let focusTask = Vue.extend({
+    template: '#modal-template',
+    data: function() {
+        return {
+            active: false,
+            id: 0,
+            task: {}
+        }
+    },
+    methods: {
+        open: function(id)  {
+            this.task = store.getters.task(id);
+            this.active = true
+        },
+        close: function() {
+            this.active = false
+        }
+    },
+
+    mounted: function(){
+        this.$nextTick(function() {
+            taskList.$on('open-modal', this.open)
+            taskList.$on('close-modal', this.close)
+        }.bind(this))
+    }
+})
+
 let taskList = new Vue({
     el: '#task-list',
+    components: {
+        'focus-task': focusTask
+    },
+
     computed:{
         tasks: function(){
             return store.state.tasks
+        }
+    },
+
+    methods:{
+        openModal: function (id) {
+            this.$emit('open-modal', id)
+        },
+        closeModal: function () {
+            this.$emit('close-modal')
         }
     },
 

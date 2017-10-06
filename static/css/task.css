@@ -1,35 +1,5 @@
-.task-col {
-    margin: 10px;
-    padding-left: 0px;
-    padding-right: 0px;
-    border-style: solid;
-    border-radius: 3px;
-    border-width: 1px;
-    border-color: #808080;
-}
-
 
 .task-content {
     padding: 15px;
 }
 
-.taskinfo {
-    padding: 5px;
-    background-color: #808080;
-    color : #ffffff;
-}
-
-.taskinfo-limit {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.taskinfo-place {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.taskinfo-importance {
-    margin-left: 10px;
-    margin-right: 10px;
-}
