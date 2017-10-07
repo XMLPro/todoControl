@@ -20,6 +20,7 @@ const store = new  Vuex.Store({
             }
         },
 
+
         placeImportance: (state) => (id) => {
             for(var i=0; i<state.places.length; i++){
                 if(id == state.places[i].id) return state.places[i].importance
@@ -35,7 +36,12 @@ const store = new  Vuex.Store({
                     return {task_id: task.id, value:
                         1 * (1 + getters.placeImportance(task.task_id)/100) * (1 + task.importance/100)
                     }
-                }else return 1
+                }else {
+                    return {
+                        task_id: task.id, value:
+                        1* (1 + (task.workload == 0? 1:task.workload)/(task.limit_time)) * (1 + getters.placeImportance(task.task_id)/100) * (1 + task.importance/100)
+                    }
+                }
             })
 
             values.sort((t1, t2) => {
@@ -92,11 +98,15 @@ let focusTask = Vue.extend({
     },
     methods: {
         open: function(id)  {
+            this.id = id
             this.task = store.getters.task(id);
             this.active = true
         },
         close: function() {
             this.active = false
+        },
+        commit: function () {
+
         }
     },
 

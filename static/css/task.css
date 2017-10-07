@@ -3,3 +3,6 @@
     padding: 15px;
 }
 
+.task-info-left {
+    text-overflow:  ellipsis;
+}
