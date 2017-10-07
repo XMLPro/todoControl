@@ -8,6 +8,13 @@ const store = new  Vuex.Store({
         addTask(state, task) {
             state.tasks.push(task)
         },
+        updateTask(state, task){
+            state.tasks.forEach((element, index) => {
+                if(element.id === task.id){
+                    state.tasks[index] = task
+                }
+            })
+        },
         addPlace(state, place){
             state.places.push(place)
         },
@@ -103,11 +110,13 @@ let focusTask = Vue.extend({
             this.active = true
         },
         close: function() {
+            store.commit('updateTask', this.task)
+            axios.post('/task/update', this.task).
+                then((response) => console.log(response)).
+                catch((error) => console.log(error))
+
             this.active = false
         },
-        commit: function () {
-
-        }
     },
 
     mounted: function(){

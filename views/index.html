@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>todoControl</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
     <link href="/static/css/task.css" rel="stylesheet">
     <link href="/static/css/focus.css" rel="stylesheet">
 </head>
@@ -27,7 +29,7 @@
                 <div class="panel-body">{{ task.content }}</div>
                 <div class="panel-footer clearfix">
                     <div class="task-info-left pull-left">
-                        <span class="task-info">{{ task.limit }}</span>
+                        <span class="task-info">{{ task.limit_time }}</span>
                         <span class="task-info">{{ task.workload }}</span>
                         <span class="task-info">{{ task.place_id }}</span>
                         <span class="task-info">{{ task.importance }}</span>
@@ -41,6 +43,7 @@
         </div>
         <focus-task></focus-task>
     </div>
+
 </div>
 <script type="text/x-template" id="modal-template">
     <transition name="modal">
@@ -54,7 +57,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-3">
-                                    <input type="text" class="form-control" id="date">
+                                    <el-date-picker v-model="task.limit_time" type="datetime"></el-date-picker>
                                 </div>
                                 <div class="col-lg-3">b</div>
                                 <div class="col-lg-6">c</div>
@@ -73,14 +76,14 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/vuex"></script>
-<script src="/static/js/main.js"></script>
-<script type="text/javascript">
-    $(function () {
-        $('#date').datetimepicker();
-
-    });
+<script src="http://unpkg.com/element-ui/lib/index.js"></script>
+<script src="http://unpkg.com/element-ui/lib/umd/locale/ja.js"></script>
+<script>
+    ELEMENT.locale(ELEMENT.lang.ja)
 </script>
+<script src="/static/js/main.js"></script>
 </body>
 </html>

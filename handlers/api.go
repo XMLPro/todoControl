@@ -50,3 +50,14 @@ func AddTask(w http.ResponseWriter, r *http.Request){
 	jsonData,_  := json.Marshal(task)
 	writeJson(w,jsonData)
 }
+
+func UpdateTaskHandler(w http.ResponseWriter, r *http.Request){
+	var task models.Task
+	err := json.NewDecoder(r.Body).Decode(&task)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	db.UpdateTask(task)
+}
