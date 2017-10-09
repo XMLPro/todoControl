@@ -4,7 +4,6 @@ import (
 	"github.com/XMLPro/todoControl/models"
 	"log"
 	sq "github.com/Masterminds/squirrel"
-	"fmt"
 )
 
 func (db *DB) GetTasks() []models.Task {
@@ -91,16 +90,14 @@ func (db *DB) GetLatestTask() models.Task {
 
 func (db *DB) UpdateTask(task models.Task){
 	_, err := sq.Update("tasks").
-		Set("content", &task.Content).
-		Set("limit_time", &task.LimitTime).
-		Set("workload", &task.Workload).
-		Set("place_id", &task.PlaceId).
-		Set("importance", &task.Importance).
+		Set("content", task.Content).
+		Set("limit_time", task.LimitTime).
+		Set("workload", task.Workload).
+		Set("place_id", task.PlaceId).
+		Set("importance", task.Importance).
 		Where("id=?", task.Id).
 		RunWith(db.db).
 		Exec()
-
-	fmt.Print("a")
 
 	if err != nil {
 		log.Fatal(err)
