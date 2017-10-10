@@ -2,7 +2,7 @@ package database
 
 import (
 	"testing"
-	"github.com/XMLPro/todoControl/models"
+	"github.com/XMLPro/todoControl/src/goc/go/models"
 	"log"
 )
 

@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/XMLPro/todoControl/models"
+	"github.com/XMLPro/todoControl/src/go/models"
 	sq "github.com/Masterminds/squirrel"
 	"log"
 )

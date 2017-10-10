@@ -12,8 +12,21 @@
 
 <body>
 <div class="container">
+    <header>
+        <h1>Todo Control</h1>
+    </header>
     <div class="row" id="warning-task">
-        {{ warningTask }}
+        <div class="panel panel-danger">
+            <div class="panel-body">{{ warningTask.content }}</div>
+            <div class="panel-footer clearfix">
+                <div class="task-info-left pull-left">
+                    <span class="task-info">{{ warningTask.limit_time }}</span>
+                    <span class="task-info">{{ warningTask.workload }}</span>
+                    <span class="task-info">{{ warningTask.place_id }}</span>
+                    <span class="task-info">{{ warningTask.importance }}</span>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row" id="new-task">
         <div class="input-group">
@@ -57,15 +70,28 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-3">
-                                    <el-date-picker v-model="task.limit_time" type="datetime"></el-date-picker>
+                                    期限:
+                                    <el-date-picker v-model="task.limit_time" type="datetime"
+                                                    format="yyyy/MM/dd HH"></el-date-picker>
                                 </div>
-                                <div class="col-lg-3">b</div>
-                                <div class="col-lg-6">c</div>
+                                <div class="col-lg-3">
+                                    作業時間(時):<input v-model.number="task.workload" type="number">
+                                </div>
+                                <div class="col-lg-3">
+                                    場所:
+                                    <select v-model="task.place_id">
+                                        <option></option>
+                                        <option v-for="item in places" v-bind:value="item.id">{{ item.place_name }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">
+                                    重要度:<input v-model.number="task.importance" type="number">
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" @click="commit">保存</button>
                         <button class="btn btn-danger" @click="close">閉じる</button>
                     </div>
                 </div>
@@ -84,6 +110,6 @@
 <script>
     ELEMENT.locale(ELEMENT.lang.ja)
 </script>
-<script src="/static/js/main.js"></script>
+<script src="/static/main.js"></script>
 </body>
 </html>

@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"encoding/json"
-	"github.com/XMLPro/todoControl/database"
+	"github.com/XMLPro/todoControl/src/go/database"
 	"log"
-	"github.com/XMLPro/todoControl/models"
+	"github.com/XMLPro/todoControl/src/go/models"
 )
 
 var db *database.DB = database.NewDB("dev.db")

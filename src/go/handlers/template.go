@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-const templatePath string = "views"
+const templatePath string = "template"
 
 type TemplateHandler struct {
 	once     sync.Once

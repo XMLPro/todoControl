@@ -33,11 +33,11 @@ const store = new  Vuex.Store({
                 if(id == state.places[i].id) return state.places[i].importance
             }
 
-            return null
+            return 0
         },
 
         warningTask: (state, getters) => {
-            if(state.tasks.length == 0) return null
+            if(state.tasks.length == 0) return {id:0, content: '', importance:0, limit_time: 0, workload: 0, place_id: 0,}
             var values = state.tasks.map((task) => {
                 if (task.limit_time == 0){
                     return {task_id: task.id, value:
@@ -67,8 +67,8 @@ const store = new  Vuex.Store({
 
 let warningTask = new Vue({
     el: '#warning-task',
-    computed: {
-        warningTask: function(){
+    computed:{
+        warningTask : function () {
             return store.getters.warningTask
         }
     }
@@ -83,6 +83,7 @@ let newTask = new Vue({
 
     methods:{
         addTask: function(){
+            console.log(this.content)
             if(this.content.trim() == "")
                 return null
 
@@ -99,17 +100,26 @@ let focusTask = Vue.extend({
     data: function() {
         return {
             active: false,
-            id: 0,
             task: {}
+        }
+    },
+    computed:{
+        places: function () {
+            return store.state.places
         }
     },
     methods: {
         open: function(id)  {
             this.id = id
             this.task = store.getters.task(id);
+            console.log(this.task)
             this.active = true
         },
         close: function() {
+            console.log(this.task)
+            if (!this.task.workload) this.task.workload = 0
+            if (!this.task.importance) this.task.importance = 0
+
             store.commit('updateTask', this.task)
             axios.post('/task/update', this.task).
                 then((response) => console.log(response)).
